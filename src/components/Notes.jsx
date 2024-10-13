@@ -6,6 +6,8 @@ import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteNotes } from '../Redux/slices/FeaturesSlice';
 import { Link } from 'react-router-dom';
+
+
 const Notes = () => {
 
   //managing the states using useselector hooks 
@@ -35,11 +37,28 @@ const Notes = () => {
                   <br/> 
                   
 
-                  <button>
+                  {/* <button>
                             <a href={`/?NoteId=${Note.NoteId}`}>update</a>
-                  </button>
+                  </button> */}
 
+                  <Link to={`/?NoteId=${Note.NoteId}`}>
+                                 update
+                  </Link>
+
+                   <br/>
                   {/* important functionality hai to just view your snippet  */}
+                 
+                  {/* <button>
+                      view
+                        <a href={`/Notes/${Note.NoteId}`}></a>
+                   </button> */}
+
+                   <Link to={`/Notes/ViewNotes/?NoteId=${Note.NoteId}`}>
+                         <button>
+                               View
+                         </button>
+                   </Link>
+                 
                    
                   
               </div>
