@@ -22,7 +22,7 @@ const Button = () => {
         </button>
       </Link>
 
-      <Link to='/ViewNotes'>
+      <Link to='/Notes'>
         <button
           onClick={() => setToggle(false)}
           className={`${baseButtonStyles} ${!toggle ? 'bg-blue-500 text-white' : 'bg-slate-200 text-black'}`}

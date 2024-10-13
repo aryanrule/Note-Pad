@@ -1,42 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from './Button'
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FiShare2 } from "react-icons/fi";
 import { FaEye } from "react-icons/fa";
-
-import { GrUpdate } from "react-icons/gr";
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { DeleteNotes } from '../Redux/slices/FeaturesSlice';
+import { Link } from 'react-router-dom';
 const Notes = () => {
 
+  //managing the states using useselector hooks 
+  //Whatever is there in the  Notes show it on the UI 
+  const Notes = useSelector((state)=> state.Feature.Notes);
+ 
 
-  
-
+  useEffect(()=> {
+    console.log(Notes);   // this is an array 
+  });
+  const dispatch = useDispatch();
+   
+ 
   return (
-    <div className='flex flex-col justify-center items-center '>
-       <Button/>
+    //using map function just simply go and make cards 
 
-           
-        <div className='w-[80%] h-[150px] bg-slate-200 m-10 rounded-xl '>
-
-          <div className='flex flex-row items-center justify-between'>
-
-          <h1 className=' font-bold text-[20px] p-2'>title</h1>
-
-          <div className='flex gap-3 p-3'>
-          <FaEye className='h-[20px] w-[20px]' />
-          <GrUpdate className='h-[20px] w-[20px]' />
-          <RiDeleteBinLine  className='h-[20px] w-[20px]' />
-          <FiShare2 className='h-[20px] w-[20px] ' />
-          </div>
+    <div>
+         <Button/> 
           
-          </div>
-          <div className='h-[1px] w-full bg-black'></div>
+          {
+            Notes.length === 0 ? (<div>Nothing is here</div>) : 
+            (
+             Notes.map((Note)=>(
+              <div key = {Note.NoteId}>
+                  <p>{Note.title} </p>
+                  <button onClick={() => dispatch(DeleteNotes(Note.NoteId , Note))}>delete</button>
+                  <br/> 
+                  
 
-          <p>oirfhiusduifub</p>
-        </div>
+                  <button>
+                            <a href={`/?NoteId=${Note.NoteId}`}>update</a>
+                  </button>
 
+                  {/* important functionality hai to just view your snippet  */}
+                   
+                  
+              </div>
+             ))
+            )
+          }
     </div>
+
   )
 }
 
